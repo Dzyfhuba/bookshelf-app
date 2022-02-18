@@ -5,7 +5,16 @@ if (typeof(Storage) !== 'undefined') {
     }
     book = JSON.parse(localStorage.getItem('book'));
 
-    filterBook(book);
+    displayBook(book);
+
+    document.getElementById('searchBook').addEventListener('submit', function(e) {
+        e.preventDefault();
+        compareBook = book.filter(function(item) {
+            return item.title.toLowerCase().includes(document.getElementById('searchBookTitle').value.toLowerCase());
+        });
+        document.getElementById('incompleteBookshelfList').innerHTML = '';
+        displayBook(compareBook);
+    });
 
     inputBook = document.getElementById('inputBook');
     inputBook.addEventListener('submit', insertBook());
@@ -13,7 +22,7 @@ if (typeof(Storage) !== 'undefined') {
     alert("Browser yang Anda gunakan tidak mendukung Web Storage")
 }
 
-function filterBook(book) {
+function displayBook(book) {
     notComplete = book.filter(function(item) {
         return item.isComplete == false;
     });
@@ -67,5 +76,6 @@ function insertBook() {
         };
         book.push(data);
         localStorage.setItem('book', JSON.stringify(book));
+        displayBook(book);
     };
 }
