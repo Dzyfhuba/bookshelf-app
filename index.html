@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="clear.css">
 </head>
 
 <body>
@@ -42,12 +44,14 @@
         <section class="search_section">
             <h2>Cari Buku (Opsional)</h2>
             <form id="searchBook">
-                <label for="searchBookTitle">Judul</label>
-                <input id="searchBookTitle" type="text">
+                <label for="searchBookTitle">Judul:</label>
+                <span class="input-search">
+                    <input id="searchBookTitle" type="text">
+                    <span id="clear">&times;</span>
+                </span>
                 <button id="searchSubmit" type="submit">Cari</button>
             </form>
         </section>
-
         <section class="book_shelf">
             <h2>Belum selesai dibaca</h2>
 
