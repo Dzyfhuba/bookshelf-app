@@ -1,25 +1,27 @@
-span.input-search {
+.input-search {
     position: relative;
     display: inline-flex;
     align-items: center;
 }
 
-span.input-search span {
+.input-search span {
     position: absolute;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     right: 3px;
-    width: 15px;
-    height: 15px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    color: #fff;
-    background-color: #ccc;
-    font: 13px monospace;
+    color: white;
+    background-color: lightgray;
+    font: xx-large monospace;
     text-align: center;
     line-height: 1em;
     cursor: pointer;
 }
 
-span.input-search input {
+.input-search input {
     padding-right: 18px;
     box-sizing: border-box;
 }

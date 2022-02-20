@@ -14,53 +14,68 @@
 </head>
 
 <body>
-    <header class="head_bar">
-        <h1 class="head_bar__title">Bookshelf Apps</h1>
-    </header>
-    <main>
-        <section class="input_section">
-            <h2>Masukkan Buku Baru</h2>
-            <form id="inputBook">
-                <div class="input">
-                    <label for="inputBookTitle">Judul</label>
-                    <input id="inputBookTitle" type="text" required>
-                </div>
-                <div class="input">
-                    <label for="inputBookAuthor">Penulis</label>
-                    <input id="inputBookAuthor" type="text" required>
-                </div>
-                <div class="input">
-                    <label for="inputBookYear">Tahun</label>
-                    <input id="inputBookYear" type="number" required>
-                </div>
-                <div class="input_inline">
-                    <label for="inputBookIsComplete">Selesai dibaca</label>
-                    <input id="inputBookIsComplete" type="checkbox">
-                </div>
-                <button id="bookSubmit" type="submit">Masukkan Buku ke rak <span>Belum selesai dibaca</span></button>
-            </form>
-        </section>
-
+    <header>
+        <h1 class="title">Bookshelf Apps</h1>
         <section class="search_section">
-            <h2>Cari Buku (Opsional)</h2>
             <form id="searchBook">
-                <label for="searchBookTitle">Judul:</label>
                 <span class="input-search">
-                    <input id="searchBookTitle" type="text">
+                    <input id="searchBookTitle" type="text" placeholder="Cari berdasarkan judul">
                     <span id="clear">&times;</span>
                 </span>
                 <button id="searchSubmit" type="submit">Cari</button>
             </form>
         </section>
-        <section class="book_shelf">
-            <h2>Belum selesai dibaca</h2>
+    </header>
+    <main>
+        <button class="open-modal">
+            Tambah Buku Baru
+        </button>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <section class="input_section fadeIn">
+                        <h2>Masukkan Buku Baru</h2>
+                        <form id="inputBook">
+                            <div class="input">
+                                <label for="inputBookTitle">Judul</label>
+                                <input id="inputBookTitle" type="text" required>
+                            </div>
+                            <div class="input">
+                                <label for="inputBookAuthor">Penulis</label>
+                                <input id="inputBookAuthor" type="text" required>
+                            </div>
+                            <div class="input">
+                                <label for="inputBookYear">Tahun</label>
+                                <input id="inputBookYear" type="number" required>
+                            </div>
+                            <div class="input_inline">
+                                <label for="inputBookIsComplete">Selesai dibaca</label>
+                                <input id="inputBookIsComplete" type="checkbox">
+                            </div>
+                            <button id="bookSubmit" type="submit">Masukkan Buku ke rak <span>Belum selesai dibaca</span></button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
 
+
+        <ul style="list-style-type: none; display: flex; justify-content: space-around;" class="nav">
+            <li class="active">
+                Belum Dibaca
+            </li>
+            <li class="non-active">
+                Sudah Dibaca
+            </li>
+        </ul>
+        <section class="book_shelf" style="display: block;">
             <div id="incompleteBookshelfList" class="book_list"> </div>
         </section>
 
-        <section class="book_shelf">
-            <h2>Selesai dibaca</h2>
-
+        <section class="book_shelf" style="display: none;">
             <div id="completeBookshelfList" class="book_list"> </div>
         </section>
     </main>

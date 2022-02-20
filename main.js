@@ -9,11 +9,9 @@ if (typeof(Storage) !== 'undefined') {
 
     document.getElementById('searchBook').addEventListener('submit', searchBook());
 
-    clear = document.getElementById('clear');
-    clear.addEventListener('click', function(e) {
-        e.previousElementSibling.value = '';
-        e.focus();
-    });
+    document.querySelector('span#clear').addEventListener('click', (e) => {
+        document.getElementById('searchBook').reset()
+    })
 
     document.querySelectorAll('#markAsCompleted, #markAsNotCompleted').forEach(e => {
         e.addEventListener('click', toggleCompleteMark(e));
@@ -26,22 +24,47 @@ if (typeof(Storage) !== 'undefined') {
     inputBook = document.getElementById('inputBook');
     inputBook.addEventListener('submit', insertBook());
 
+    openModal = document.querySelectorAll('.open-modal');
+    openModal.forEach(e => {
+        e.addEventListener('click', openDeleteBookModal(e));
+    });
+
     var btn = document.querySelectorAll("#deleteBookModal");
     btn.forEach(e => {
         e.addEventListener('click', openDeleteBookModal(e));
     });
+
     closeModal = document.querySelectorAll(".close");
     closeModal.forEach(e => {
         e.addEventListener('click', closeDeleteBookModal(e));
     });
-    window.addEventListener('click', closeDeleteBookModal2(e));
+    window.addEventListener('click', closeDeleteBookModal2());
+
+    document.querySelectorAll('.nav li').forEach(e => {
+        e.addEventListener('click', function(e) {
+            e.target.setAttribute('class', 'active');
+            notComplete = document.getElementById('incompleteBookshelfList').parentElement;
+            hasComplete = document.getElementById('completeBookshelfList').parentElement;
+            if (e.target.nextElementSibling != null) {
+                notComplete.style.display = 'block';
+                hasComplete.style.display = 'none';
+                e.target.nextElementSibling.setAttribute('class', 'non-active');
+            }
+            if (e.target.previousElementSibling != null) {
+                notComplete.style.display = 'none';
+                hasComplete.style.display = 'block';
+                e.target.previousElementSibling.setAttribute('class', 'non-active');
+            }
+        });
+    });
+
 } else {
     alert("Browser yang Anda gunakan tidak mendukung Web Storage")
 }
 
-function closeDeleteBookModal2(e) {
+function closeDeleteBookModal2() {
     return function(e) {
-        if (e.target == modal) {
+        if (e.target.style.display == 'block') {
             modal.style.display = "none";
         }
     };
@@ -123,9 +146,11 @@ function displayBook(book) {
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <span class="close">&times;</span>
+                        <span class="close">&times;</span>
+                        <h2>Yakin akan dihapus?</h2>
                         </div>
                         <div class="modal-body">
+                            <button id="closeModal" class="blue">Batal</button>
                             <button id="deleteBook" class="red">Hapus Buku</button>
                         </div>
                     </div>
@@ -150,9 +175,11 @@ function displayBook(book) {
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <h2>Yakin akan dihapus?</h2>
                             <span class="close">&times;</span>
                         </div>
                         <div class="modal-body">
+                            <button id="closeModal" class="blue">Batal</button>
                             <button id="deleteBook" class="red">Hapus Buku</button>
                         </div>
                     </div>
@@ -181,5 +208,6 @@ function insertBook() {
         book.push(data);
         localStorage.setItem('book', JSON.stringify(book));
         displayBook(book);
+        window.location.reload();
     };
 }
